@@ -130,6 +130,17 @@ else ifeq ($(platform), libnx)
    HAVE_RGLGEN = 1
    HAVE_RPC = 0
    DEBUG = 0
+
+else ifeq ($(platform), emscripten)
+   TARGET := $(TARGET_NAME)_libretro_$(platform).bc
+   CFLAGS = $(DEFINES)
+   CXXFLAGS = $(DEFINES) -DOS_RNG_AVAILABLE -DBOOST_ASIO_HAS_PTHREADS
+   ARCH = wasm32
+   STATIC_LINKING = 1
+   HAVE_GLAD = 1
+   HAVE_RGLGEN = 1
+   HAVE_RPC = 0
+
 else ifneq (,$(findstring windows_msvc2019,$(platform)))
 	LIBS =
 
